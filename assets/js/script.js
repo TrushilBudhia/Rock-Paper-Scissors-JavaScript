@@ -32,11 +32,11 @@ paperButton.setAttribute('data-type', 'Paper');
 scissorsButton.setAttribute('data-type', 'Scissors');
 
 // Adding styles to the elements
-body.setAttribute('style', 'background: #e7e7e7; margin: 0; padding: 0;');
-mainSelect.setAttribute('style', 'height: 67vh;');
-headingSelect.setAttribute('style', 'font-size: 3rem; text-align: center;');
+body.setAttribute('style', 'background: #e7e7e7; font-family: Noto Sans, sans-serif; margin: 0; padding: 0;');
+mainSelect.setAttribute('style', 'background: #fff; border-radius: 7px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); height: 61vh; padding: 20px 0px; margin: 0 auto; max-width: 600px;');
+headingSelect.setAttribute('style', 'background: #fff; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%); color: #4e4e4e; font-size: 3rem; margin: 0 auto; margin-bottom: 40px; padding: 10px 0; text-align: center;');
 gameHeading.setAttribute('style', 'font-size: 1.8rem; text-align: center;');
-buttonContainer.setAttribute('style', 'display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 auto; margin-bottom: 20px; max-width: 600px;');
+buttonContainer.setAttribute('style', 'box-shadow: 0px 3px 5px 1px rgb(0 0 0 / 10%); display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 auto; margin-bottom: 20px; padding-bottom: 20px; width: 100%;');
 gameResultContainer.setAttribute('style', 'font-size: 130%; text-align: center;');
 footerSection.setAttribute('style', 'background: #313131; color: #fff; margin: 0 auto; padding: 20px; text-align: center;');
 horizontalLine.setAttribute('style', 'max-width: 600px;');
@@ -54,7 +54,7 @@ buttonContainer.appendChild(rockButton);
 buttonContainer.appendChild(paperButton);
 buttonContainer.appendChild(scissorsButton);
 mainSelect.appendChild(buttonContainer);
-mainSelect.appendChild(horizontalLine);
+// mainSelect.appendChild(horizontalLine);
 body.insertBefore(footerSection, scriptSection);
 
 /*************************************************************************************************/
@@ -67,18 +67,6 @@ var buttonActiveColor = '#20ba1a';
 
 // Function to style the buttons
 function buttonStyling() {
-
-    // for(i = 0; i < buttonSelect.length; i++) {
-    //     var mediaQuery = window.matchMedia("(min-width: 500px)");
-    //     if (buttonSelect) {         
-    //         buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px;`);
-    //         /* the viewport is at least 400 pixels wide */
-    //        } else {
-    //         /* the viewport is less than 400 pixels wide */
-    //         buttonContainer.setAttribute('style', 'display: block; margin: 0 auto; margin-bottom: 20px; max-width: 600px;');
-    //         buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px; width: 100%;`);
-    //     }
-    // }
     for(i = 0; i < buttonSelect.length; i++) {   
         buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px;`);
     }
@@ -189,7 +177,7 @@ function renderScoreBoard() {
     scoreArticleContainer.append(winCounter);
     scoreArticleContainer.append(drawCounter);
     scoreArticleContainer.append(loseCounter);
-    scoreArticleContainer.setAttribute('style', 'display: flex; flex-direction: row; font-size: 1.4rem; justify-content: space-between;');
+    scoreArticleContainer.setAttribute('style', 'display: flex; flex-direction: row; font-size: 1.4rem; justify-content: space-between; padding: 0 20px;');
     scoreSection.append(scoreArticleContainer);
     scoreSection.append(resetScoreButton);
     scoreSection.setAttribute('style', 'display: flex; flex-direction: column; justify-content: center; margin: 0 auto; max-width: 600px; position: relative; bottom: 20vh;');
@@ -292,20 +280,24 @@ scissorsButton.addEventListener('click', buttonSelection);
 
 var resetScores = document.querySelector('#reset-score');
 var resetButtonColor = '#fff'; 
-var resetButtonHoverColor = '#f0b23d';
-var resetButtonActiveColor = '#f6682a';
+var resetButtonHoverColor = '#f6682a';
+var resetButtonActiveColor = '#f0b23d';
 resetScores.addEventListener('mouseover', function(event) {
     event.target.style.background = resetButtonHoverColor;
+    event.target.style.color = '#fff';
 });  
 resetScores.addEventListener('mouseleave', function(event) {
     event.target.style.background = resetButtonColor;
+    event.target.style.color = '#000';
 });  
 
 resetScores.addEventListener('mousedown', function(event) {
     event.target.style.background = resetButtonActiveColor;
+    event.target.style.color = '#fff';
 });  
 resetScores.addEventListener('mouseup', function(event) {
     event.target.style.background = resetButtonColor;
+    event.target.style.color = '#000';
 });  
 resetScores.addEventListener('click', resetScore);
 // Invoking the function to load the scores to the webpage
