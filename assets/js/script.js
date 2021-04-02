@@ -36,7 +36,7 @@ body.setAttribute('style', 'background: #e7e7e7; margin: 0; padding: 0;');
 mainSelect.setAttribute('style', 'height: 67vh;');
 headingSelect.setAttribute('style', 'font-size: 3rem; text-align: center;');
 gameHeading.setAttribute('style', 'font-size: 1.8rem; text-align: center;');
-buttonContainer.setAttribute('style', 'display: flex; justify-content: center; margin: 20px 0;');
+buttonContainer.setAttribute('style', 'display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 auto; margin-bottom: 20px; max-width: 600px;');
 gameResultContainer.setAttribute('style', 'font-size: 130%; text-align: center;');
 footerSection.setAttribute('style', 'background: #313131; color: #fff; margin: 0 auto; padding: 20px; text-align: center;');
 horizontalLine.setAttribute('style', 'max-width: 600px;');
@@ -67,8 +67,20 @@ var buttonActiveColor = '#20ba1a';
 
 // Function to style the buttons
 function buttonStyling() {
-    for(i = 0; i < buttonSelect.length; i++) {
-        buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; font-size: 0.9rem; margin: 10px; outline: none; padding: 20px 40px;`);
+
+    // for(i = 0; i < buttonSelect.length; i++) {
+    //     var mediaQuery = window.matchMedia("(min-width: 500px)");
+    //     if (buttonSelect) {         
+    //         buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px;`);
+    //         /* the viewport is at least 400 pixels wide */
+    //        } else {
+    //         /* the viewport is less than 400 pixels wide */
+    //         buttonContainer.setAttribute('style', 'display: block; margin: 0 auto; margin-bottom: 20px; max-width: 600px;');
+    //         buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px; width: 100%;`);
+    //     }
+    // }
+    for(i = 0; i < buttonSelect.length; i++) {   
+        buttonSelect[i].setAttribute('style', `background: ${buttonColor}; border: 1px solid #a8a8a8; border-radius: 10px; color: #fff; display: flex; font-size: 0.9rem; outline: none; padding: 20px 40px;`);
     }
 }
 
@@ -282,7 +294,6 @@ var resetScores = document.querySelector('#reset-score');
 var resetButtonColor = '#fff'; 
 var resetButtonHoverColor = '#f0b23d';
 var resetButtonActiveColor = '#f6682a';
-
 resetScores.addEventListener('mouseover', function(event) {
     event.target.style.background = resetButtonHoverColor;
 });  
@@ -296,9 +307,7 @@ resetScores.addEventListener('mousedown', function(event) {
 resetScores.addEventListener('mouseup', function(event) {
     event.target.style.background = resetButtonColor;
 });  
-
 resetScores.addEventListener('click', resetScore);
-
 // Invoking the function to load the scores to the webpage
 loadScores();
 
