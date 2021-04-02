@@ -1,26 +1,25 @@
 // VARIABLES
 var body = document.body;
-var mainSelect = document.querySelector('main');
-var headingSelect = document.querySelector('h1');
 
 var numberWins = 0;
 var numberDraws = 0;
 var numberLosses = 0;
-var winValue = false;
 
 // Creating elements
+var mainSection = document.createElement('main');
+var headerSection = document.createElement('header');
+var headingSelect = document.createElement('h1');
 var gameHeading = document.createElement('h2');
 var buttonContainer = document.createElement('section');
 var rockButton = document.createElement('button');
 var paperButton = document.createElement('button');
 var scissorsButton = document.createElement('button');
-var horizontalLine = document.createElement('hr');
 var gameResultContainer = document.createElement('section');
 var playerChoiceResult = document.createElement('article');
 var scoreSection = document.createElement('section');
 var scoreArticleContainer = document.createElement('article');
 var footerSection = document.createElement('footer');
-
+var footerParagraph = document.createElement('p');
 var scriptSection = document.querySelector('script');
 
 // Adding id's to the buttons
@@ -32,30 +31,33 @@ paperButton.setAttribute('data-type', 'Paper');
 scissorsButton.setAttribute('data-type', 'Scissors');
 
 // Adding styles to the elements
-body.setAttribute('style', 'background: #e7e7e7; font-family: Noto Sans, sans-serif; margin: 0; padding: 0;');
-mainSelect.setAttribute('style', 'background: #fff; border-radius: 7px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); height: 61vh; padding: 20px 0px; margin: 0 auto; max-width: 600px;');
+body.setAttribute('style', 'background: #ff9b68; font-family: Noto Sans, sans-serif; margin: 0; padding: 0;');
+mainSection.setAttribute('style', 'background: #fff; border-radius: 7px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); height: 61vh; padding: 20px 0px; margin: 0 auto; max-width: 600px;');
 headingSelect.setAttribute('style', 'background: #fff; box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 4px 4px 0 rgb(0 0 0 / 19%); color: #4e4e4e; font-size: 3rem; margin: 0 auto; margin-bottom: 40px; padding: 10px 0; text-align: center;');
 gameHeading.setAttribute('style', 'font-size: 1.8rem; text-align: center;');
 buttonContainer.setAttribute('style', 'box-shadow: 0px 3px 5px 1px rgb(0 0 0 / 10%); display: flex; flex-wrap: wrap; justify-content: space-around; margin: 0 auto; margin-bottom: 20px; padding-bottom: 20px; width: 100%;');
 gameResultContainer.setAttribute('style', 'font-size: 130%; text-align: center;');
-footerSection.setAttribute('style', 'background: #313131; color: #fff; margin: 0 auto; padding: 20px; text-align: center;');
-horizontalLine.setAttribute('style', 'max-width: 600px;');
+footerSection.setAttribute('style', 'background: #313131; color: #fff; margin: 0 auto; padding: 5px 0; text-align: center;');
 
 // Adding text to the elements
+headingSelect.textContent = 'Rock, Paper, Scissors';
 gameHeading.textContent = 'Choose an option:';
 rockButton.textContent = 'ROCK';
 paperButton.textContent = 'PAPER';
 scissorsButton.textContent = 'SCISSORS';
-footerSection.textContent = '© Created by Trushil';
+footerParagraph.textContent = '© Created by Trushil';
 
 // Appending the elements to the html
-mainSelect.appendChild(gameHeading);
+body.insertBefore(headerSection, scriptSection);
+headerSection.appendChild(headingSelect);
+body.insertBefore(mainSection, scriptSection);
+mainSection.appendChild(gameHeading);
 buttonContainer.appendChild(rockButton);
 buttonContainer.appendChild(paperButton);
 buttonContainer.appendChild(scissorsButton);
-mainSelect.appendChild(buttonContainer);
-// mainSelect.appendChild(horizontalLine);
+mainSection.appendChild(buttonContainer);
 body.insertBefore(footerSection, scriptSection);
+footerSection.appendChild(footerParagraph);
 
 /*************************************************************************************************/
 /******************************************* FUNCTIONS *******************************************/
@@ -63,7 +65,10 @@ body.insertBefore(footerSection, scriptSection);
 var buttonSelect = document.querySelectorAll('button');
 var buttonColor = '#ff6666'; 
 var buttonHoverColor = '#f63333';
-var buttonActiveColor = '#20ba1a'; 
+var buttonActiveColor = '#f87f42'; 
+var winColor = '#1dba1f';
+var drawColor = '#337cb2';
+var loseColor = '#ff2e2e';
 
 // Function to style the buttons
 function buttonStyling() {
@@ -92,7 +97,7 @@ function appendGameResults(choice, paragraphChoice) {
     paragraphChoice.append(spanChoice);
     playerChoiceResult.append(paragraphChoice);
     gameResultContainer.append(playerChoiceResult);
-    mainSelect.append(gameResultContainer);
+    mainSection.append(gameResultContainer);
 }
 
 // Function to display the users selection
@@ -117,6 +122,9 @@ function computerSelection() {
 
 // Function to display the game result
 function gameResult() {
+    win.setAttribute('style', 'color: #000;');
+    draw.setAttribute('style', 'color: #000;');
+    lose.setAttribute('style', 'color: #000;');
     var userSpanSelect = document.getElementById('user-selection');
     var computerSpanSelect = document.getElementById('computer-selection');
     // Assigning the selection from the user and the computer to variables
@@ -138,23 +146,26 @@ function gameResult() {
     // Determining whether the player has won, lost or tied and displaying a message conveying such
     if(winRock || winPaper || winScissors) {
         paragraphResult.textContent = gameWin;
+        paragraphResult.setAttribute('style', `color: ${winColor};`);
         numberWins++;
         setWins();
     } 
     else if(loseRock || losePaper || loseScissors) {
         paragraphResult.textContent = gameLose;
+        paragraphResult.setAttribute('style', `color: ${loseColor};`);
         numberLosses++;
         setLosses();
     }
     else {
         paragraphResult.textContent = gameDraw;
+        paragraphResult.setAttribute('style', `color: ${drawColor};`);
         numberDraws++;
         setDraws();
     }
     // Appending the paragraphResult to the html
     playerChoiceResult.append(paragraphResult);
     gameResultContainer.append(playerChoiceResult);
-    mainSelect.append(gameResultContainer);
+    mainSection.append(gameResultContainer);
 }
 
 // Functions relating to the score board
@@ -200,16 +211,19 @@ var lose = document.querySelector("#lose");
 
 function setWins() {
     win.textContent = "Wins: " + numberWins;
+    win.setAttribute('style', `color: ${winColor};`);
     localStorage.setItem("numberWins", numberWins);
 }
 
 function setDraws() {
     draw.textContent = "Draws: " + numberDraws;
+    draw.setAttribute('style', `color: ${drawColor};`);
     localStorage.setItem("numberDraws", numberDraws);
 }
 
 function setLosses() {
     lose.textContent = "Losses: " + numberLosses;
+    lose.setAttribute('style', `color: ${loseColor};`);
     localStorage.setItem("numberLosses", numberLosses);
 }
 
@@ -281,7 +295,7 @@ scissorsButton.addEventListener('click', buttonSelection);
 var resetScores = document.querySelector('#reset-score');
 var resetButtonColor = '#fff'; 
 var resetButtonHoverColor = '#f6682a';
-var resetButtonActiveColor = '#f0b23d';
+var resetButtonActiveColor = '#ff9b68';
 resetScores.addEventListener('mouseover', function(event) {
     event.target.style.background = resetButtonHoverColor;
     event.target.style.color = '#fff';
